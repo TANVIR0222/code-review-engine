@@ -1,8 +1,8 @@
 import QueryProvider from "@/components/provider/query-provider";
 import { ThemeProvider } from "@/components/provider/theme-provider";
-import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
+import { cn } from "../lib/utils";
 import "./globals.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
@@ -40,16 +40,16 @@ export default function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <QueryProvider>
+      <QueryProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <body className="min-h-full flex flex-col">{children}</body>
-        </QueryProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </QueryProvider>
     </html>
   );
 }
