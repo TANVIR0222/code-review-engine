@@ -1,11 +1,10 @@
 import QueryProvider from "@/components/provider/query-provider";
 import { ThemeProvider } from "@/components/provider/theme-provider";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { DM_Sans, Geist, Geist_Mono } from "next/font/google";
-import { cn } from "../lib/utils";
+import { Geist, Geist_Mono, Oxanium } from "next/font/google";
 import "./globals.css";
-
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const oxanium = Oxanium({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,20 +35,26 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         "font-sans",
-        dmSans.variable,
+        oxanium.variable,
       )}
       suppressHydrationWarning
     >
-      <QueryProvider>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <body className="min-h-full flex flex-col">{children}</body>
-        </ThemeProvider>
-      </QueryProvider>
+      <body
+        className={
+          " flex-1 items-center justify-center bg-black  px-4 min-h-screen flex flex-col"
+        }
+      >
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
+      </body>
     </html>
   );
 }
